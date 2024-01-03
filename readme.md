@@ -9,7 +9,7 @@ It is able to parse the header and subsequent segments, and dump it into a yaml 
 legictk-bin2yaml -f input.bin -o output/output.yaml --kinds=kgh,raw,raw
 ```
 
-The '--kinds' argument enables interpretation of the segment, in order. 'raw' segment kind output segment header into the yaml file and WRP and payload content into external binary files. 'kgh' segment kind correctly interpret the WRP field as the stamp and payload as the ID.
+The `--kinds` argument enables interpretation of the segment, in order. `raw` segment kind output segment header into the yaml file and WRP and payload content into external binary files. `kgh` segment kind correctly interpret the WRP field as the stamp and payload as the ID.
 
 ```
 legictk-yaml2bin -f input/input.yaml output.bin --is-deobfuscated --obfuscate
