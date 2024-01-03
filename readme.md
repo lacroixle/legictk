@@ -19,4 +19,4 @@ legictk-yaml2bin -f input/input.yaml output.bin --is-deobfuscated --obfuscate
 This code has only been tested on MIM1024 cards but should work with other medias (MIM22 and MIM256). It cannot interpret the DCF field of the header, this means no GAM, IAM, etc creation.
 
 # Dependencies
-None.
+`crcmod` for CRC computations.
