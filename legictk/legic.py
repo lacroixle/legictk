@@ -26,7 +26,7 @@ class LegicMemBlock:
         if len(block) == 22:
             mim = 'mim22'
         elif len(block) == 256:
-            mim == 'mim256'
+            mim = 'mim256'
         elif len(block) == 1024:
             mim = 'mim1024'
         else:
