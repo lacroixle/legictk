@@ -1,0 +1,93 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[project]
+name = "legictk"
+dynamic = ["version"]
+description = "Tools to help reverse engineering of Legic Prime systems"
+readme = "readme.md"
+requires-python = ">=3.8"
+license = "Unlicense"
+keywords = []
+authors = [
+  { name = "Leander Lacroix", email = "leander.lacroix.dev@protonmail.com" },
+]
+classifiers = [
+]
+dependencies = [
+  "crcmod",
+  "pyyaml"
+]
+
+[project.scripts]
+legictk-bin2yaml = "legictk.bin2yaml:main"
+legictk-yaml2bin = "legictk.yaml2bin:main"
+legictk-trace-ops = "legictk.trace_ops:main"
+legictk-deobfuscate = "legictk.deobfuscate:main"
+
+[project.urls]
+Documentation = "https://github.com/lacroixle/legictk#readme"
+Issues = "https://github.com/lacroixle/legictk/issues"
+Source = "https://github.com/lacroixle/legictk"
+
+
+[tool.hatch.version]
+path = "src/legictk/__about__.py"
+
+
+[tool.hatch.envs.default]
+dependencies = [
+  "coverage[toml]>=6.5",
+  "pytest",
+]
+
+
+[tool.hatch.envs.default.scripts]
+test = "pytest {args:tests}"
+test-cov = "coverage run -m pytest {args:tests}"
+cov-report = [
+  "- coverage combine",
+  "coverage report",
+]
+
+
+cov = [
+  "test-cov",
+  "cov-report",
+]
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+
+[tool.hatch.envs.types]
+dependencies = [
+  "mypy>=1.0.0",
+]
+
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/legictk tests}"
+
+
+[tool.coverage.run]
+source_pkgs = ["legictk", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/legictk/__about__.py",
+]
+
+
+[tool.coverage.paths]
+legictk = ["src/legictk", "*/legictk/src/legictk"]
+tests = ["tests", "*/legictk/tests"]
+
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]

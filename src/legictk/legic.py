@@ -2,8 +2,8 @@
 import yaml
 import logging
 
-from printutils import print_hex_block, to_hex_string
-from bitutils import crc8_legic, obfuscate_bytearray, deobfuscate_bytearray
+from .printutils import print_hex_block, to_hex_string
+from .bitutils import crc8_legic, obfuscate_bytearray, deobfuscate_bytearray
 
 
 mim2size = {'mim22': 22,
@@ -159,7 +159,7 @@ class LegicHeader:
 
         # Fugly but okay..
         if MCC[0] != crc8_legic(UID):
-            logging.warning("LegicHeader.from_bytearray(): wrong MCC CRC! Got {:02x}, should be {:02x}".format(MCC, crc8_legic(UID)))
+            logging.warning("LegicHeader.from_bytearray(): wrong MCC CRC! Got {:02x}, should be {:02x}".format(int(MCC[0]), int(crc8_legic(UID))))
 
         if BCC != LegicHeader.compute_BCC(UID, BCK):
             logging.warning("LegicHeader.from_bytearray(): wrong BCC CRC! Got {:02x}, should be {:02x}".format(int(BCC), int(LegicHeader.compute_BCC(UID, BCK))))

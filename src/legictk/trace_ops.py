@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 
+import sys
 import argparse
 import pathlib
 
-from printutils import print_hex_block, to_hex_string
-from legic import LegicMemBlock
-from trace import Trace
+from legictk.printutils import print_hex_block, to_hex_string
+from legictk.legic import LegicMemBlock
+from legictk.trace import Trace
 
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--trace', type=pathlib.Path, required=True)
     parser.add_argument('--dump', type=pathlib.Path, required=True)
@@ -53,3 +54,7 @@ if __name__ == '__main__':
         print("")
 
     print("==================================================")
+
+
+if __name__ == '__main__':
+    sys.exit(main())

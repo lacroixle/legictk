@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 
+import sys
 import argparse
 import pathlib
 import crcmod
 import yaml
 
-from legic import LegicMemBlock
+from legictk.legic import LegicMemBlock
 
-if __name__ == '__main__':
+
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', type=pathlib.Path, required=True)
     parser.add_argument('-o', type=pathlib.Path)
@@ -25,3 +27,7 @@ if __name__ == '__main__':
 
     with open(args.o, 'wb') as f:
         f.write(out)
+
+
+if __name__ == '__main__':
+    sys.exit(main())
