@@ -18,7 +18,8 @@ classifiers = [
 ]
 dependencies = [
   "crcmod",
-  "pyyaml"
+  "pyyaml",
+  "termcolor"
 ]
 
 [project.scripts]

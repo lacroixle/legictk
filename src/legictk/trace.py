@@ -43,8 +43,12 @@ class Trace:
             data = trace['data']
             bitsend = int(data[0])
             cmdbit = int(data[1] & 1)
-            if (bitsend == 9 or bitsend == 11) and cmdbit==op_cmdbit:
+            if (bitsend == 9 or bitsend == 11) and (cmdbit == op_cmdbit):
                 addresses.append((data[2] << 7) | (data[1] >> 1))
+            elif (op_cmdbit == 0) & (bitsend == 21):
+                addresses.append(((data[2] << 7) | (data[1] >> 1)) & 0xFF)
+            elif (op_cmdbit == 0) & (bitsend == 23):
+                addresses.append(((data[2] << 7) | (data[1] >> 1)) & 0x3FF)
 
         return sorted(list(set(addresses)))
 
